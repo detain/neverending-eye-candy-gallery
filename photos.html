@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Imagini Arcanum</title>
+        <link rel="stylesheet" href="photos.css">
+    </head>
+    <body>
+        <h1>Imagini Arcanum</h1>
+        <p>Inifitely load and display images</p>
+        <div class="madeby">Coded withg 💜 and 🧠 by detain 🧙‍♂️</div> 
+        <div class="grid">
+            <div class="grid__col-sizer"></div>
+            <div class="grid__gutter-sizer"></div>
+        </div>
+        <div class="page-load-status">
+            <div class="loader-ellips infinite-scroll-request">
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+                <span class="loader-ellips__dot"></span>
+            </div>                                                                   
+            <p class="infinite-scroll-last">End of content</p>
+            <p class="infinite-scroll-error">No more pages to load</p>
+        </div>
+        <script type="text/html" id="photo-item-template">
+            <div class="photo-item" id="img-{{file.name}}" width="{{size.width}}" height="{{size.height}}">
+                <img class="photo-item__image" src="{{type}}/{{file.src}}" alt="Photo by {{file.name}}" width="{{size.width}}" height="{{size.height}}" />
+                <p class="photo-item__caption">
+                    {{file.name}}
+                </p>
+            </div>
+        </script>
+        <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+        <script src='//unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.js'></script>
+        <script src="//unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+        <script src='//unpkg.com/masonry-layout@4/dist/masonry.pkgd.js'></script>
+        <script src="//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+        <script  src="photos.js"></script>
+    </body>
+</html>
