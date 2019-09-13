@@ -3,9 +3,6 @@ Packery Infinite-Scroll Images-Loaded JSON Scrolling Image Gallery
 
 Impeccable Imagry
 
-[https://github.com/detain/neverending-eye-candy-gallery/wiki/Image-Gallery-Related-Samples-of-Notable-Quality-with-Features-worthy-of-future-inclusion](Image Gallery Related Samples of Notable Quality with Features worthy of future inclusion)
-
-
 ## Setup
 
 Run this to generate the list of images and thier resolutions

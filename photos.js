@@ -1,5 +1,8 @@
+
 var gridType = 'packery'; // masonry packery or isotope
-var pageType = 'gifs'; // gifs images or wallpapers
+var pageType = 'ProgrammerHumor'; // gifs images or wallpapers
+if (pageType == 'family') gridType = 'masonry';
+$('#photo-grid').addClass(gridType);
 function pageScroll() {
         window.scrollBy(0,4); // horizontal and vertical scroll increments
         scrolldelay = setTimeout('pageScroll()',100); // scrolls every 100 milliseconds

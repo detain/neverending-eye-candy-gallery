@@ -24,6 +24,11 @@ body {
     /* width: 24%; */
 }
 
+.grid.masonry .grid__col-sizer,
+.grid.masonry .photo-item {
+    width: 24%;
+}
+
 .grid__gutter-sizer {
     width: 1%;
 }

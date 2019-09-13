@@ -9,9 +9,7 @@ header('Content-type: application/json; charset=UTF-8');
 session_start();
 error_log($_SESSION['start']);
 $photos = [];
-$type = isset($_GET['type']) ? $_GET['type'] : 'gifs';
-if (!in_array($type, ['gifs', 'images', 'wallpapers']))
-    $type = 'gifs';
+$type = isset($_GET['type']) && in_array($_GET['type'], ['anime', 'family', 'gifs', 'images', 'wallpapers']) ? $_GET['type'] : 'ProgrammerHumor';
 $result = file_get_contents(__DIR__.'/'.$type.'.txt'); // generated with file * > gifs.txt
 preg_match_all('/^([^:]*):\s+.* (\d+)\s?x\s?(\d+)[^0-9].*$/msuU', $result, $matches);
 $pageLimit = 5;
