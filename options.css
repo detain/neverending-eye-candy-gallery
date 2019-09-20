@@ -9,19 +9,21 @@ html {
 body {
   color: #435757;
   background: radial-gradient(#fff, #dac4cd);
-  font: 1.1em/1 'Noto Sans', sans-serif;
+  font: 1.1em/1 "Noto Sans", sans-serif;
 }
-.container {
-  width: 100%;
+#optionsContainer {
+  width: 90%;
+  margin-left: 5%;
   heght: 100%;
   position: absolute;
   display: block;
+  border: 1px solid black;
 }
-input {
+#optionsContainer input {
   position: absolute;
   left: -9999px;
 }
-label {
+#optionsContainer label, #optionsContainer #optionsButton {
   width: 300px;
   display: inline-table;
   position: relative;
@@ -31,23 +33,27 @@ label {
   border-radius: 100px;
   color: #fff;
   background-color: #6a8494;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  transition: background-color .2s, box-shadow .2s;
+  user-select: none;
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
+#optionsContainer #optionsButton {
+    font: bold 1.1em/1 "Noto Sans", sans-serif;
+    width: 150px;
+    padding-left: 20px; 
+    background-color: #bbc195;
+    left: 80%;
+}    
 #formatsContainer label {
-  background-color: #4a4264;  
+  background-color: #4a4264;
 }
 #audioContainer label {
-  background-color: #7a7274;  
+  background-color: #7a7274;
 }
-label::before {
-  content: '';
+#optionsContainer label::before {
+  content: "";
   display: block;
   position: absolute;
   top: 10px;
@@ -56,14 +62,14 @@ label::before {
   width: 32px;
   border: 3px solid #fff;
   border-radius: 100px;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
-label:hover, input:focus + label {
-  box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+#optionsContainer label:hover, #optionsContainer input:focus + label {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
-input:checked + label {
+#optionsContainer input:checked + label {
   background-color: #ab576c;
 }
-input:checked + label::before {
+#optionsContainer input:checked + label::before {
   background-color: #fff;
 }
