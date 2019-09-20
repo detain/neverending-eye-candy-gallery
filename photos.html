@@ -25,7 +25,18 @@
         </div>
         <script type="text/html" id="photo-item-template">
             <div class="photo-item" id="img-{{file.name}}" width="{{size.width}}" height="{{size.height}}">
-                <img class="photo-item__image" src="{{type}}/{{file.src}}" alt="Photo by {{file.name}}" width="{{size.width}}" height="{{size.height}}" />
+                <img class="photo-item__image" src="images/{{file.src}}" alt="Photo by {{file.name}}" width="{{size.width}}" height="{{size.height}}" />
+                <p class="photo-item__caption">
+                    {{file.name}}
+                </p>
+            </div>
+        </script>
+        <script type="text/html" id="video-item-template">
+            <div class="photo-item" id="img-{{file.name}}" width="{{size.width}}" height="{{size.height}}">
+                <video class="photo-item__image" width="{{size.width}}" height="{{size.height}}" autoplay controls>
+                    <source src="images/{{file.src}}" type="video/{{file.ext}}">
+                    Your browser does not support the video tag.
+                </video> 
                 <p class="photo-item__caption">
                     {{file.name}}
                 </p>
