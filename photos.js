@@ -1,6 +1,7 @@
-
+var formatType = 'ALL';
+var audioType = 'null';
 var gridType = 'packery'; // masonry packery or isotope
-var pageType = 'ProgrammerHumor'; // gifs images or wallpapers
+var pageType = 'reddit_sub_ProgrammerHumor'; // gifs images or wallpapers
 if (pageType == 'family') gridType = 'masonry';
 $('#photo-grid').addClass(gridType);
 function pageScroll() {
@@ -43,8 +44,7 @@ if (gridType == 'masonry') {
 $grid.infiniteScroll.imagesLoaded = imagesLoaded;
 $grid.infiniteScroll({
     path: function() {
-        //return ("photos-api.php?type=" + pageType + "&page=" + this.pageIndex);
-        return ("photos-api.php?format=MPEG-4&audio=true&type=" + pageType + "&page=" + this.pageIndex);
+        return ("photos-api.php?format=" + formatType + "&audio=" + audioType + "&type=" + pageType + "&page=" + this.pageIndex);
     },
     responseType: "text", // load response as flat text
     outlayer: gridInsance,
@@ -87,4 +87,4 @@ function microTemplate(src, data) { // micro templating, sort-of
         return value;
     });
 }
-//pageScroll();
+pageScroll();

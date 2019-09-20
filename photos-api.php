@@ -11,7 +11,19 @@ $server = json_decode(file_get_contents('server.json'), true);
 $photos = [];
 $type = isset($_GET['type']) && in_array($_GET['type'], $server['dirs']) ? $_GET['type'] : $server['dirs'][0];
 $format = isset($_GET['format']) && in_array($_GET['format'], $server['formats']) ? $_GET['format'] : false;
-$audio = isset($_GET['audio']) && in_array($_GET['audio'], ['1', 1, true, 'true']) ? true : (isset($_GET['audio']) && in_array($_GET['audio'], ['0', 0, false, 'false']) ? false : null);
+if (isset($_GET['audio'])) {
+    if (in_array($_GET['audio'], ['null'])) {
+        $audio = null;
+    } elseif (in_array($_GET['audio'], ['1', 1, true, 'true'])) {
+        $audio = true;
+    } elseif (in_array($_GET['audio'], ['0', 0, false, 'false'])) {
+        $audio = false;
+    } else {
+        $audio = null;
+    }    
+} else {
+    $audio = null;
+}
 if (isset($_GET['id'])) {
     $idx = 0;
     foreach ($files as $data) {
