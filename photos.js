@@ -43,7 +43,8 @@ if (gridType == 'masonry') {
 $grid.infiniteScroll.imagesLoaded = imagesLoaded;
 $grid.infiniteScroll({
     path: function() {
-        return ("photos-api.php?type=" + pageType + "&page=" + this.pageIndex);
+        //return ("photos-api.php?type=" + pageType + "&page=" + this.pageIndex);
+        return ("photos-api.php?format=MPEG-4&audio=true&type=" + pageType + "&page=" + this.pageIndex);
     },
     responseType: "text", // load response as flat text
     outlayer: gridInsance,
@@ -68,8 +69,14 @@ $grid.on("load.infiniteScroll", function(event, response) {
 });
 $grid.infiniteScroll("loadNextPage"); // load initial page
 var itemTemplateSrc = $("#photo-item-template").html();
+var videoTemplateSrc = $("#video-item-template").html();
 function getItemHTML(photo) {
-    return microTemplate(itemTemplateSrc, photo);
+    if (photo.format == "MPEG-4") {
+        return microTemplate(videoTemplateSrc, photo);
+    } else {
+        return microTemplate(itemTemplateSrc, photo);
+    }
+    
 }
 function microTemplate(src, data) { // micro templating, sort-of
     return src.replace(/\{\{([\w\-_\.]+)\}\}/gi, function(match, key) { // replace {{tags}} in source
@@ -80,4 +87,4 @@ function microTemplate(src, data) { // micro templating, sort-of
         return value;
     });
 }
-pageScroll();
+//pageScroll();

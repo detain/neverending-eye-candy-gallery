@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Imagini Arcanum</title>
-        <link rel="stylesheet" href="photos.css?20190901">
+        <link rel="stylesheet" href="photos.css?20190903">
     </head>
     <body>
         <h1>Imagini Arcanum</h1>
@@ -24,22 +24,22 @@
             <p class="infinite-scroll-error">No more pages to load</p>
         </div>
         <script type="text/html" id="photo-item-template">
-            <div class="photo-item" id="img-{{file.name}}" width="{{size.width}}" height="{{size.height}}">
-                <img class="photo-item__image" src="images/{{file.src}}" alt="Photo by {{file.name}}" width="{{size.width}}" height="{{size.height}}" />
+            <div class="photo-item" id="img-{{name}}" width="{{width}}" height="{{height}}">
+                <img class="photo-item__image" src="images/{{dir}}/{{file}}" alt="Photo by {{name}}" width="{{width}}" height="{{height}}" />
                 <p class="photo-item__caption">
-                    {{file.name}}
+                    {{name}}
                 </p>
             </div>
         </script>
         <script type="text/html" id="video-item-template">
-            <div class="photo-item" id="img-{{file.name}}" width="{{size.width}}" height="{{size.height}}">
-                <video class="photo-item__image" width="{{size.width}}" height="{{size.height}}" autoplay controls>
-                    <source src="images/{{file.src}}" type="video/{{file.ext}}">
+            <div class="photo-item" id="img-{{name}}" width="{{width}}" height="{{height}}">
+                <video class="photo-item__image" width="{{width}}" height="{{height}}" autoplay loop controls>
+                    <source src="images/{{dir}}/{{file}}" type="video/{{ext}}">
                     Your browser does not support the video tag.
                 </video> 
-                <p class="photo-item__caption">
-                    {{file.name}}
-                </p>
+                <!-- <p class="photo-item__caption">
+                    {{name}}
+                </p> -->
             </div>
         </script>
         <!-- <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script> -->
@@ -49,6 +49,6 @@
         <script src='//unpkg.com/masonry-layout@4/dist/masonry.pkgd.js'></script>
         <script src="//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
         <script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-        <script  src="photos.js?20190902"></script>
+        <script  src="photos.js?20190903"></script>
     </body>
 </html>

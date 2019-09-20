@@ -11,15 +11,15 @@ $server = json_decode(file_get_contents('server.json'), true);
 $photos = [];
 $type = isset($_GET['type']) && in_array($_GET['type'], $server['dirs']) ? $_GET['type'] : $server['dirs'][0];
 $format = isset($_GET['format']) && in_array($_GET['format'], $server['formats']) ? $_GET['format'] : false;
-$audio = isset($_GET['audio']) && in_array($_GET['audio'], ['1', 1, true, 'true']) ? true : isset($_GET['audio']) && in_array($_GET['audio'], ['0', 0, false, 'false']) ? false : null;
+$audio = isset($_GET['audio']) && in_array($_GET['audio'], ['1', 1, true, 'true']) ? true : (isset($_GET['audio']) && in_array($_GET['audio'], ['0', 0, false, 'false']) ? false : null);
 if (isset($_GET['id'])) {
     $idx = 0;
     foreach ($files as $data) {
         if ($data['dir'] == $type) {
             //echo $data['dir'].'::'.$data['file'].'::'.'type::';
-            if ($format === false || $data['type'] == $format) {
+            if ($format === false || $data['format'] == $format) {
                 //echo 'format::';
-                if (is_null($audio) || $audio == $data['audio']) {
+                if ($audio === null || $audio === $data['audio']) {
                     //echo 'audio::';
                     if ($idx == $_GET['id']) {
                         ///echo 'id::good';
@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
 } else {
     session_start();
     header('Content-type: application/json; charset=UTF-8');
-    $pageLimit = 20;
+    $pageLimit = 5;
     $pageIdx = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalImages = $server['counts']['dirs'][$type];
     $imageStart = ($pageIdx - 1) * $pageLimit; 
@@ -51,10 +51,10 @@ if (isset($_GET['id'])) {
     $idx = 0;
     foreach ($files as $data) {
         if ($data['dir'] == $type) {
-            if ($format === false || $data['type'] == $format) {
+            if ($format === false || $data['format'] == $format) {
                 if (is_null($audio) || $audio == $data['audio']) {
                     if ($idx >= $imageStart && $idx <= $imageEnd) {
-                        $name = $data['file'];
+                        $data['name'] = str_replace(['.'.$data['ext'], '_'], ['', ' '], $data['file']);
                         $photos[] = $data;
                     }
                     $idx++;
