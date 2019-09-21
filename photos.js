@@ -48,6 +48,14 @@ function microTemplate(src, data) { // micro templating, sort-of
     });
 }
 
+$("#nsfwHas").change(function() {
+    console.log($(this));
+    if ($(this).prop('checked') == true) {
+        $("#typesContainer .nsfw").show();
+    } else {
+        $("#typesContainer .nsfw").hide();
+    }
+})
 jQuery.getJSON('server.json', {}, function (json) {
     server = json;
     $("#formatsContainer").append('<input id="formatALL" name="format" type="radio" value="ALL" checked><label for="formatALL">ALL</label>');
@@ -60,7 +68,11 @@ jQuery.getJSON('server.json', {}, function (json) {
       var cat = server.dirs[i];
       var catId = "toggle" + cat;
       var catLabel = cat.replace("reddit_sub_", "");
-      $("#typesContainer").append('<input id="' + catId + '" name="type[]" type="checkbox" value="' + cat + '"><label for="' + catId + '">' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
+      var extra = '';
+      if (server.tags.nsfw.indexOf(cat) != -1) {
+          extra = 'class="nsfw"';
+      }
+      $("#typesContainer").append('<input id="' + catId + '" name="type[]" ' + extra + ' type="checkbox" value="' + cat + '"><label for="' + catId + '">' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
     }
 });
 $("#optionsButton").click(function() {

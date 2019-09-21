@@ -11,19 +11,34 @@
         <p>Inifitely load and display images</p>
         <div class="madeby">Coded withg 💜 and 🧠 by detain 🧙‍♂️</div>
         <div class="container" id="optionsContainer">
+            <table style="width: 90%;">
+                <tr>
+                    <td><h2>Audio</h2></td>
+                    <td>
+                        <div id="audioContainer">
+                            <input id="audioBoth" name="audio" type="radio" value="null" checked>
+                            <label for="audioBoth">Both</label>
+                            <input id="audioNone" name="audio" type="radio" value="false">
+                            <label for="audioNone">No Sound</label>
+                            <input id="audioHas" name="audio" type="radio" value="true">
+                            <label for="audioHas">Has Sound</label>    
+                        </div>                    
+                    </td>
+                    <td style="float: right;">
+                            <input id="nsfwHas" name="nsfw" type="checkbox" value="true">
+                            <label for="nsfwHas" style="float: right; margin-right: 10px;">Include NSFW</label>    
+                    </td>
+                </tr>
+                <tr>
+                    <td><h2>Media Type</h2></td>
+                    <td>
+                        <div id="formatsContainer"></div>
+                    </td>
+                </tr>
+            </table>
             <h2>Categories</h2>
             <div id="typesContainer"></div>
-            <h2>Media Type</h2>
-            <div id="formatsContainer"></div>
-            <h2>Audio</h2>
-            <div id="audioContainer">
-                <input id="audioBoth" name="audio" type="radio" value="null" checked>
-                <label for="audioBoth">Both</label>
-                <input id="audioNone" name="audio" type="radio" value="false">
-                <label for="audioNone">No Sound</label>
-                <input id="audioHas" name="audio" type="radio" value="true">
-                <label for="audioHas">Has Sound</label>    
-            </div>
+           
             <button id="optionsButton">Go</button>            
         </div>
          

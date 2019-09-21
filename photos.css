@@ -36,7 +36,7 @@ body {
   position: relative;
   margin: 5px;
   padding: 5px 5px 5px 34px;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   border-radius: 100px;
   color: #fff;
   background-color: #6a8494;
@@ -55,9 +55,11 @@ body {
 }    
 #formatsContainer label {
   background-color: #4a4264;
+  width: 150px;
 }
 #audioContainer label {
   background-color: #7a7274;
+  width: 150px;
 }
 #optionsContainer label::before {
   content: "";
