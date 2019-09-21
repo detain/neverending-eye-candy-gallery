@@ -4,6 +4,7 @@ var gridType = 'packery'; // masonry packery or isotope
 var pageType = 'reddit_sub_ProgrammerHumor'; // gifs images or wallpapers
 var enableScrolling = false;
 var server;
+var itemIdx = 0;
 
 function pageScroll() {
     if (enableScrolling == true) {
@@ -27,8 +28,10 @@ function startScroll() {
 }
 
 function getItemHTML(photo) {
+    photo.idx = itemIdx;
+    ++itemIdx;
     if (photo.format == "MPEG-4") {
-        return microTemplate(videoTemplateSrc, photo);
+        return microTemplate(videoTemplateSrc, photo);        
     } else {
         return microTemplate(itemTemplateSrc, photo);
     }
@@ -124,9 +127,11 @@ $grid.on("load.infiniteScroll", function(event, response) {
         } else if (gridType == 'isotope') {
             $grid.infiniteScroll("appendItems", $items).isotope("appended", $items);
         }
-        //if ($('.photo-item').length >= server.pageLimit)
-        console.log(data);
-        console.log(data.length);
+        $('video').each(function() { 
+            if ($(this).prop('paused') == true) { 
+                $(this).load(); 
+            } 
+        });        
         if (data.length >= server.pageLimit) {
             $grid.infiniteScroll("loadNextPage"); // load initial pag
         } else {

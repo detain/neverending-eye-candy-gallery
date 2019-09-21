@@ -42,7 +42,7 @@
             <p class="infinite-scroll-error">No more pages to load</p>
         </div>
         <script type="text/html" id="photo-item-template">
-            <div class="photo-item" id="img-{{name}}" width="{{width}}" height="{{height}}">
+            <div class="photo-item" id="img-{{idx}}" width="{{width}}" height="{{height}}">
                 <img class="photo-item__image" src="images/{{dir}}/{{file}}" alt="Photo by {{name}}" width="{{width}}" height="{{height}}" />
                 <p class="photo-item__caption">
                     {{name}}
@@ -50,10 +50,9 @@
             </div>
         </script>
         <script type="text/html" id="video-item-template">
-            <div class="photo-item" id="img-{{name}}" width="{{width}}" height="{{height}}">
-                <video class="photo-item__image" width="{{width}}" height="{{height}}" autoplay loop controls>
+            <div class="photo-item" id="img-{{idx}}" width="{{width}}" height="{{height}}">
+                <video id="video-{{idx}}" class="photo-item__image" width="{{width}}" height="{{height}}" autoplay loop controls>
                     <source src="images/{{dir}}/{{file}}" type="video/{{ext}}">
-                    Your browser does not support the video tag.
                 </video> 
                 <!-- <p class="photo-item__caption">
                     {{name}}
