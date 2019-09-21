@@ -9,11 +9,11 @@ html {
 body {
   color: #435757;
   background: radial-gradient(#fff, #dac4cd);
-  font: 1.1em/1 "Noto Sans", sans-serif;
+  font: 0.9em/1 "Noto Sans", sans-serif;
 }
 #optionsContainer {
-  width: 90%;
-  margin-left: 5%;
+  width: 93%;
+  margin-left: 3%;
   heght: 100%;
   position: absolute;
   display: block;
@@ -24,11 +24,11 @@ body {
   left: -9999px;
 }
 #optionsContainer label, #optionsContainer #optionsButton {
-  width: 300px;
+  width: 225px;
   display: inline-table;
   position: relative;
   margin: 5px;
-  padding: 10px 20px 10px 52px;
+  padding: 5px 5px 5px 34px;
   border: 3px solid #fff;
   border-radius: 100px;
   color: #fff;
@@ -56,16 +56,16 @@ body {
   content: "";
   display: block;
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: 8px;
+  bottom: 8px;
   left: 10px;
-  width: 32px;
+  width: 20px;
   border: 3px solid #fff;
   border-radius: 100px;
   transition: background-color 0.2s;
 }
 #optionsContainer label:hover, #optionsContainer input:focus + label {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 #optionsContainer input:checked + label {
   background-color: #ab576c;
