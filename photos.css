@@ -8,10 +8,10 @@ html {
 }
 body {
   color: #435757;
-  background: radial-gradient(#fff, #dac4cd);
   font: 0.9em/1 "Noto Sans", sans-serif;
 }
 #optionsContainer {
+  /*background: radial-gradient(#fff, #dac4cd);*/
   width: 96%;
   margin-left: 2%;
   heght: 100%;
