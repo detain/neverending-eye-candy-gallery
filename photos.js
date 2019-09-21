@@ -5,6 +5,7 @@ var pageType = 'reddit_sub_ProgrammerHumor'; // gifs images or wallpapers
 var enableScrolling = false;
 var server;
 var itemIdx = 0;
+var showNsfw = false;
 
 function pageScroll() {
     if (enableScrolling == true) {
@@ -51,8 +52,10 @@ function microTemplate(src, data) { // micro templating, sort-of
 $("#nsfwHas").change(function() {
     console.log($(this));
     if ($(this).prop('checked') == true) {
+        showNsfw = true;
         $("#typesContainer .nsfw").show();
     } else {
+        showNsfw = false;
         $("#typesContainer .nsfw").hide();
     }
 })
@@ -71,8 +74,11 @@ jQuery.getJSON('server.json', {}, function (json) {
       var extra = '';
       if (server.tags.nsfw.indexOf(cat) != -1) {
           extra = 'class="nsfw"';
+          if (showNsfw == false) {
+              extra = extra + ' style="display: none;"';
+          }
       }
-      $("#typesContainer").append('<input id="' + catId + '" name="type[]" ' + extra + ' type="checkbox" value="' + cat + '"><label for="' + catId + '">' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
+      $("#typesContainer").append('<input id="' + catId + '" name="type[]" ' + extra + ' type="checkbox" value="' + cat + '"><label for="' + catId + '" ' + extra + ' >' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
     }
 });
 $("#optionsButton").click(function() {
