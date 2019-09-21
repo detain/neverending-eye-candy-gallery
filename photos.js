@@ -2,7 +2,49 @@ var formatType = 'ALL';
 var audioType = 'null';
 var gridType = 'packery'; // masonry packery or isotope
 var pageType = 'reddit_sub_ProgrammerHumor'; // gifs images or wallpapers
+var enableScrolling = false;
 var server;
+
+function pageScroll() {
+    if (enableScrolling == true) {
+        window.scrollBy(0,4); // horizontal and vertical scroll increments
+    }
+    scrolldelay = setTimeout('pageScroll()',100); // scrolls every 100 milliseconds
+}
+
+function startScroll() {
+    $grid.infiniteScroll({
+        path: function() {
+            return ("photos-api.php?format=" + formatType + "&audio=" + audioType + "&type=" + pageType + "&page=" + this.pageIndex);
+        },
+        responseType: "text", // load response as flat text
+        outlayer: gridInsance,
+        status: ".page-load-status",
+        history: false
+    });
+    $grid.infiniteScroll("loadNextPage"); // load initial page
+    enableScrolling = true;    
+}
+
+function getItemHTML(photo) {
+    if (photo.format == "MPEG-4") {
+        return microTemplate(videoTemplateSrc, photo);
+    } else {
+        return microTemplate(itemTemplateSrc, photo);
+    }
+    
+}
+
+function microTemplate(src, data) { // micro templating, sort-of
+    return src.replace(/\{\{([\w\-_\.]+)\}\}/gi, function(match, key) { // replace {{tags}} in source
+        var value = data; // walk through objects to get value
+        key.split(".").forEach(function(part) {
+            value = value[part];
+        });
+        return value;
+    });
+}
+
 jQuery.getJSON('https://vault3.is.cc/consolo/neverending-eye-candy-gallery/server.json', {}, function (json) {
     server = json;
     $("#formatsContainer").append('<input id="formatALL" name="format" type="radio" value="ALL" checked><label for="formatALL">ALL</label>');
@@ -18,19 +60,23 @@ jQuery.getJSON('https://vault3.is.cc/consolo/neverending-eye-candy-gallery/serve
       $("#typesContainer").append('<input id="' + catId + '" name="type[]" type="checkbox" value="' + cat + '"><label for="' + catId + '">' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
     }
 });
-$("#typesContainer input").each(function() {
-  if ($(this).prop("checked")) {
-    var cat = $(this).prop("id").replace("toggle", "");
-  }
+$("#optionsButton").click(function() {
+    $("#typesContainer input").each(function() {
+      if ($(this).prop("checked")) {
+        pageType = $(this).prop("id").replace("toggle", "");
+      }
+    });        
+    $("#formatsContainer input").each(function() {
+      if ($(this).prop("checked")) {
+        formatType = $(this).prop("id").replace("format", "");
+      }
+    });        
+    startScroll();
+    $("#optionsContainer").hide();
 });
-
 
 if (pageType == 'family') gridType = 'masonry';
 $('#photo-grid').addClass(gridType);
-function pageScroll() {
-        window.scrollBy(0,4); // horizontal and vertical scroll increments
-        scrolldelay = setTimeout('pageScroll()',100); // scrolls every 100 milliseconds
-}
 if (gridType == 'masonry') {
     var $grid = $(".grid").masonry({
         itemSelector: ".photo-item",
@@ -65,15 +111,7 @@ if (gridType == 'masonry') {
     var gridInsance = $grid.data("isotope"); // get Packery instance
 }
 $grid.infiniteScroll.imagesLoaded = imagesLoaded;
-$grid.infiniteScroll({
-    path: function() {
-        return ("photos-api.php?format=" + formatType + "&audio=" + audioType + "&type=" + pageType + "&page=" + this.pageIndex);
-    },
-    responseType: "text", // load response as flat text
-    outlayer: gridInsance,
-    status: ".page-load-status",
-    history: false
-});
+//startScroll();
 $grid.on("load.infiniteScroll", function(event, response) {
     var data = JSON.parse(response); // parse response into JSON data
     var itemsHTML = data.map(getItemHTML).join(""); // compile data into HTML
@@ -86,28 +124,20 @@ $grid.on("load.infiniteScroll", function(event, response) {
         } else if (gridType == 'isotope') {
             $grid.infiniteScroll("appendItems", $items).isotope("appended", $items);
         }
-        if ($('.photo-item').length < 50)
+        //if ($('.photo-item').length >= server.pageLimit)
+        console.log(data);
+        console.log(data.length);
+        if (data.length >= server.pageLimit) {
             $grid.infiniteScroll("loadNextPage"); // load initial pag
+        } else {
+            $grid.infiniteScroll( 'option', {
+              // disable loading on scroll
+              loadOnScroll: false,
+            });
+        }
     });
 });
-$grid.infiniteScroll("loadNextPage"); // load initial page
 var itemTemplateSrc = $("#photo-item-template").html();
 var videoTemplateSrc = $("#video-item-template").html();
-function getItemHTML(photo) {
-    if (photo.format == "MPEG-4") {
-        return microTemplate(videoTemplateSrc, photo);
-    } else {
-        return microTemplate(itemTemplateSrc, photo);
-    }
-    
-}
-function microTemplate(src, data) { // micro templating, sort-of
-    return src.replace(/\{\{([\w\-_\.]+)\}\}/gi, function(match, key) { // replace {{tags}} in source
-        var value = data; // walk through objects to get value
-        key.split(".").forEach(function(part) {
-            value = value[part];
-        });
-        return value;
-    });
-}
-//pageScroll();
+pageScroll();    
+

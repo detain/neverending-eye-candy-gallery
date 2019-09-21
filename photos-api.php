@@ -50,11 +50,10 @@ if (isset($_GET['id'])) {
 } else {
     session_start();
     header('Content-type: application/json; charset=UTF-8');
-    $pageLimit = 5;
     $pageIdx = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalImages = $server['counts']['dirs'][$type];
-    $imageStart = ($pageIdx - 1) * $pageLimit; 
-    $imageEnd = $pageIdx * $pageLimit;
+    $imageStart = ($pageIdx - 1) * $server['pageLimit']; 
+    $imageEnd = $pageIdx * $server['pageLimit'];
     if ($imageEnd > $totalImages)
         $imageEnd = $totalImages;
     if ($pageIdx == 1)
@@ -65,7 +64,7 @@ if (isset($_GET['id'])) {
         if ($data['dir'] == $type) {
             if ($format === false || $data['format'] == $format) {
                 if (is_null($audio) || $audio == $data['audio']) {
-                    if ($idx >= $imageStart && $idx <= $imageEnd) {
+                    if ($idx >= $imageStart && $idx < $imageEnd) {
                         $data['name'] = str_replace(['.'.$data['ext'], '_'], ['', ' '], $data['file']);
                         $photos[] = $data;
                     }
