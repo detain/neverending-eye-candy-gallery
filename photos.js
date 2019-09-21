@@ -45,7 +45,7 @@ function microTemplate(src, data) { // micro templating, sort-of
     });
 }
 
-jQuery.getJSON('https://vault3.is.cc/consolo/neverending-eye-candy-gallery/server.json', {}, function (json) {
+jQuery.getJSON('server.json', {}, function (json) {
     server = json;
     $("#formatsContainer").append('<input id="formatALL" name="format" type="radio" value="ALL" checked><label for="formatALL">ALL</label>');
     for (var i = 0; i < server.formats.length; ++i) {
