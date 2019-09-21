@@ -1,3 +1,89 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html {
+  min-height: 100%;
+}
+body {
+  color: #435757;
+  background: radial-gradient(#fff, #dac4cd);
+  font: 0.9em/1 "Noto Sans", sans-serif;
+}
+#optionsContainer {
+  width: 96%;
+  margin-left: 2%;
+  heght: 100%;
+  position: absolute;
+  display: block;
+  border: 3px solid black;
+  z-index: 10;
+  background-color: gray;
+  border-radius: 100px;
+}
+#optionsContainer h2, #optionsContainer h3 {
+    width: 100%;
+    text-align: center; 
+}
+#optionsContainer input {
+  position: absolute;
+  left: -9999px;
+}
+#optionsContainer label, #optionsContainer #optionsButton {
+  width: 225px;
+  display: inline-table;
+  position: relative;
+  margin: 5px;
+  padding: 5px 5px 5px 34px;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  color: #fff;
+  background-color: #6a8494;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+#optionsContainer #optionsButton {
+    font: bold 1.1em/1 "Noto Sans", sans-serif;
+    width: 150px;
+    padding-left: 20px; 
+    background-color: #bbc195;
+    left: 80%;
+}    
+#formatsContainer label {
+  background-color: #4a4264;
+}
+#audioContainer label {
+  background-color: #7a7274;
+}
+#optionsContainer label::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 10px;
+  width: 20px;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  transition: background-color 0.2s;
+}
+#optionsContainer label:hover, #optionsContainer input:focus + label {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+#optionsContainer input:checked + label {
+  background-color: #ab576c;
+}
+#optionsContainer input:checked + label::before {
+  background-color: #fff;
+}
+
+
+
+
 .madeby {
     position: absolute;
     right: 50px;

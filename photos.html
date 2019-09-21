@@ -2,13 +2,31 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Imagini Arcanum</title>
-        <link rel="stylesheet" href="photos.css?20190903">
+        <link rel="stylesheet" href="photos.css?20190904">
     </head>
     <body>
         <h1>Imagini Arcanum</h1>
         <p>Inifitely load and display images</p>
-        <div class="madeby">Coded withg 💜 and 🧠 by detain 🧙‍♂️</div> 
+        <div class="madeby">Coded withg 💜 and 🧠 by detain 🧙‍♂️</div>
+        <div class="container" id="optionsContainer">
+            <h2>Categories</h2>
+            <div id="typesContainer"></div>
+            <h2>Media Type</h2>
+            <div id="formatsContainer"></div>
+            <h2>Audio</h2>
+            <div id="audioContainer">
+                <input id="audioBoth" name="audio" type="radio" value="null" checked>
+                <label for="audioBoth">Both</label>
+                <input id="audioNone" name="audio" type="radio" value="false">
+                <label for="audioNone">No Sound</label>
+                <input id="audioHas" name="audio" type="radio" value="true">
+                <label for="audioHas">Has Sound</label>    
+            </div>
+            <button id="optionsButton">Go</button>            
+        </div>
+         
         <div id="photo-grid" class="grid">
             <div class="grid__col-sizer"></div>
             <div class="grid__gutter-sizer"></div>
@@ -49,6 +67,6 @@
         <script src='//unpkg.com/masonry-layout@4/dist/masonry.pkgd.js'></script>
         <script src="//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
         <script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-        <script  src="photos.js?20190903"></script>
+        <script  src="photos.js?20190904"></script>
     </body>
 </html>
