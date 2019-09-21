@@ -11,8 +11,11 @@
 */
 $basedir = __DIR__.'/images/';
 $server = [
+    'pageLimit' => 5,
     'counts' => [
+        'total' => 0,
         'audio' => 0,
+        'silent' => 0,
         'formats' => [],
         'dirs' => [],
         'tags' => [],
@@ -82,7 +85,10 @@ foreach (glob($basedir.'*') as $dir) {
                 $server['counts']['dirs'][$info['dir']]++;
                 if ($info['audio'] == true) {
                     $server['counts']['audio']++;
+                } else {
+                    $server['counts']['silent']++;
                 }
+                $server['counts']['total']++;
             }
         }
     }    
