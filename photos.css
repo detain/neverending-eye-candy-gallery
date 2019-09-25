@@ -14,10 +14,11 @@ body {
   /*background: radial-gradient(#fff, #dac4cd);*/
   width: 96%;
   margin-left: 2%;
+  padding-left: 20px;
   heght: 100%;
   position: absolute;
   display: block;
-  border: 3px solid black;
+  border: 3px solid darkgray;
   z-index: 10;
   background-color: gray;
   border-radius: 100px;
@@ -59,6 +60,10 @@ body {
 }
 #audioContainer label {
   background-color: #7a7274;
+  width: 150px;
+}
+#layoutContainer label {
+  background-color: #2d99e3;
   width: 150px;
 }
 #optionsContainer label::before {
