@@ -80,6 +80,13 @@ jQuery.getJSON('server.json', {}, function (json) {
     } else {
         $("#nsfwOptions").show();
     }
+    if ($("#nsfwHas").prop('checked') == true) {
+        showNsfw = true;
+        $("#typesContainer .nsfw").show();
+    } else {
+        showNsfw = false;
+        $("#typesContainer .nsfw").hide();
+    }
     $("#nsfwHas").change(function() {
         console.log($(this));
         if ($(this).prop('checked') == true) {
