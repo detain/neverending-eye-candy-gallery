@@ -82,9 +82,10 @@ jQuery.getJSON('server.json', {}, function (json) {
     }
 });
 $("#optionsButton").click(function() {
+    pageType = '';
     $("#typesContainer input").each(function() {
       if ($(this).prop("checked")) {
-        pageType = $(this).prop("id").replace("toggle", "");
+        pageType = pageType + '&type[]=' + $(this).prop("id").replace("toggle", "");
       }
     });        
     $("#formatsContainer input").each(function() {
@@ -92,11 +93,15 @@ $("#optionsButton").click(function() {
         formatType = $(this).prop("id").replace("format", "");
       }
     });        
+    $("#layoutContainer input").each(function() {
+      if ($(this).prop("checked")) {
+        gridType = $(this).prop("id").replace("layout", "");
+      }
+    });        
     startScroll();
     $("#optionsContainer").hide();
 });
 
-if (pageType == 'family') gridType = 'masonry';
 $('#photo-grid').addClass(gridType);
 if (gridType == 'masonry') {
     var $grid = $(".grid").masonry({
