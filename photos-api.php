@@ -12,7 +12,7 @@ $photos = [];
 $type = isset($_GET['type']) ? $_GET['type'] : $server['dirs'][0];
 if (!is_array($type))
     $type = [$type];
-$format = isset($_GET['format']) && in_array($_GET['format'], $server['formats']) ? $_GET['format'] : false;
+$format = isset($_GET['format']) ? $_GET['format'] : false;
 if (isset($_GET['audio'])) {
     if (in_array($_GET['audio'], ['null'])) {
         $audio = null;
@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
     foreach ($files as $data) {
         if (in_array($data['dir'], $type)) {
             //echo $data['dir'].'::'.$data['file'].'::'.'type::';
-            if ($format === false || $data['format'] == $format) {
+            if ($format === false || $format == 'ALL' || $data['format'] == $format) {
                 //echo 'format::';
                 if ($audio === null || $audio === $data['audio']) {
                     //echo 'audio::';
