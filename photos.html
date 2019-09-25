@@ -11,6 +11,7 @@
         <p>Inifitely load and display images</p>
         <div class="madeby">Coded withg 💜 and 🧠 by detain 🧙‍♂️</div>
         <div class="container" id="optionsContainer">
+            <form id="optionsForm">
             <table style="width: 90%;">
                 <tr>
                     <td><h2>Audio</h2></td>
@@ -24,7 +25,7 @@
                             <label for="audioHas">Has Sound</label>    
                         </div>                    
                     </td>
-                    <td style="float: right;">
+                    <td id="nsfwOptions" style="float: right;">
                             <input id="nsfwHas" name="nsfw" type="checkbox" value="true">
                             <label for="nsfwHas" style="float: right; margin-right: 10px;">Include NSFW</label>    
                     </td>
@@ -39,7 +40,8 @@
             <h2>Categories</h2>
             <div id="typesContainer"></div>
            
-            <button id="optionsButton">Go</button>            
+            <input type="button" id="optionsButton" value="Go">
+            </form>            
         </div>
          
         <div id="photo-grid" class="grid">

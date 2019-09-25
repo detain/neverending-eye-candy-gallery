@@ -9,7 +9,9 @@ ob_end_clean();
 $files = json_decode(file_get_contents('files.json'), true);
 $server = json_decode(file_get_contents('server.json'), true);
 $photos = [];
-$type = isset($_GET['type']) && in_array($_GET['type'], $server['dirs']) ? $_GET['type'] : $server['dirs'][0];
+$type = isset($_GET['type']) ? $_GET['type'] : $server['dirs'][0];
+if (!is_array($type))
+    $type = [$type];
 $format = isset($_GET['format']) && in_array($_GET['format'], $server['formats']) ? $_GET['format'] : false;
 if (isset($_GET['audio'])) {
     if (in_array($_GET['audio'], ['null'])) {
@@ -27,7 +29,7 @@ if (isset($_GET['audio'])) {
 if (isset($_GET['id'])) {
     $idx = 0;
     foreach ($files as $data) {
-        if ($data['dir'] == $type) {
+        if (in_array($data['dir'], $type)) {
             //echo $data['dir'].'::'.$data['file'].'::'.'type::';
             if ($format === false || $data['format'] == $format) {
                 //echo 'format::';
@@ -51,7 +53,10 @@ if (isset($_GET['id'])) {
     session_start();
     header('Content-type: application/json; charset=UTF-8');
     $pageIdx = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $totalImages = $server['counts']['dirs'][$type];
+    $totalImages = 0;
+    foreach ($type as $idx => $typeItem) {
+        $totalImages += $server['counts']['dirs'][$typeItem];
+    }
     $imageStart = ($pageIdx - 1) * $server['pageLimit']; 
     $imageEnd = $pageIdx * $server['pageLimit'];
     if ($imageEnd > $totalImages)
@@ -61,7 +66,7 @@ if (isset($_GET['id'])) {
     //for ($idx = $imageStart; $idx < $imageEnd; $idx++) {
     $idx = 0;
     foreach ($files as $data) {
-        if ($data['dir'] == $type) {
+        if (in_array($data['dir'], $type)) {
             if ($format === false || $data['format'] == $format) {
                 if (is_null($audio) || $audio == $data['audio']) {
                     if ($idx >= $imageStart && $idx < $imageEnd) {

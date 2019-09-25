@@ -24,6 +24,10 @@ $server = [
     'dirs' => [],
     'tags' => [],
 ];
+if (file_exists('server.json')) {
+    $serverOld = json_decode(file_get_contents('server.json'), true);
+    $server['tags'] = $serverOld['tags'];
+}
 $files = file_exists('files.json') ? json_decode(file_get_contents('files.json'), true) : $files = [];
 $loadedFiles = [];
 foreach ($files as $idx => $file) {
