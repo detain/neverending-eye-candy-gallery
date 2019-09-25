@@ -17,7 +17,7 @@ function pageScroll() {
 function startScroll() {
     $grid.infiniteScroll({
         path: function() {
-            return ("photos-api.php?format=" + formatType + "&audio=" + audioType + "&type=" + pageType + "&page=" + this.pageIndex);
+            return ("photos-api.php?" + $("#optionsForm").serialize() + "&page=" + this.pageIndex);
         },
         responseType: "text", // load response as flat text
         outlayer: gridInsance,
@@ -72,13 +72,18 @@ jQuery.getJSON('server.json', {}, function (json) {
       var catId = "toggle" + cat;
       var catLabel = cat.replace("reddit_sub_", "");
       var extra = '';
-      if (server.tags.nsfw.indexOf(cat) != -1) {
+      if (typeof server.tags.nsfw != "undefined" && server.tags.nsfw.indexOf(cat) != -1) {
           extra = 'class="nsfw"';
           if (showNsfw == false) {
               extra = extra + ' style="display: none;"';
           }
       }
       $("#typesContainer").append('<input id="' + catId + '" name="type[]" ' + extra + ' type="checkbox" value="' + cat + '"><label for="' + catId + '" ' + extra + ' >' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
+    }
+    if ($(".nsfw").length == 0) {
+        $("#nsfwOptions").hide();
+    } else {
+        $("#nsfwOptions").show();
     }
 });
 $("#optionsButton").click(function() {
