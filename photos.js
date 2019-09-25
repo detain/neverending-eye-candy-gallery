@@ -80,11 +80,11 @@ jQuery.getJSON('server.json', {}, function (json) {
       }
       $("#typesContainer").append('<input id="' + catId + '" name="type[]" ' + extra + ' type="checkbox" value="' + cat + '"><label for="' + catId + '" ' + extra + ' >' + catLabel + "<span style='float: right;'>" + server.counts.dirs[cat] + "</span></label>");
     }
-    if ($(".nsfw").length == 0) {
-        $("#nsfwOptions").hide();
-    } else {
-        $("#nsfwOptions").show();
-    }
+    //if ($(".nsfw").length == 0) {
+        //$("#nsfwOptions").hide();
+    //} else {
+        //$("#nsfwOptions").show();
+    //}
 });
 $("#optionsButton").click(function() {
     pageType = '';
@@ -98,15 +98,21 @@ $("#optionsButton").click(function() {
         formatType = $(this).prop("id").replace("format", "");
       }
     });        
-    $("#layoutContainer input").each(function() {
-      if ($(this).prop("checked")) {
-        gridType = $(this).prop("id").replace("layout", "");
-      }
-    });        
+    //$("#layoutContainer input").each(function() {
+      //if ($(this).prop("checked")) {
+        //gridType = $(this).prop("id").replace("layout", "");
+      //}
+    //});        
     startScroll();
     $("#optionsContainer").hide();
 });
 
+for (var x = 0; x < document.getElementsByName('layout').length; x++ ) { 
+    var elem = document.getElementsByName('layout')[x]; 
+    if (elem.checked == true) { 
+        gridType = elem.value;
+    } 
+};
 $('#photo-grid').addClass(gridType);
 if (gridType == 'masonry') {
     var $grid = $(".grid").masonry({
@@ -148,6 +154,11 @@ $grid.on("load.infiniteScroll", function(event, response) {
     var itemsHTML = data.map(getItemHTML).join(""); // compile data into HTML
     var $items = $(itemsHTML); // convert HTML string into elements
     $items.imagesLoaded(function() { // append item elements
+        //$("#layoutContainer input").each(function() {
+          //if ($(this).prop("checked")) {
+            //gridType = $(this).prop("id").replace("layout", "");
+          //}
+        //});        
         if (gridType == 'masonry') {
             $grid.infiniteScroll("appendItems", $items).masonry("appended", $items);
         } else if (gridType == 'packery') {
