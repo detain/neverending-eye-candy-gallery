@@ -1,6 +1,8 @@
 # neverending-eye-candy-gallery
 Packery Infinite-Scroll Images-Loaded JSON Scrolling Image Gallery
 
+[Wiki](https://github.com/detain/neverending-eye-candy-gallery/wiki)
+
 Impeccable Imagry
 
 ## Setup
